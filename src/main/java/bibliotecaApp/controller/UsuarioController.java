@@ -20,5 +20,4 @@ public class UsuarioController implements Route {
 		
 		return html.toString();
 	}
-
 }
