@@ -17,8 +17,8 @@ public class App {
 		
 		//FUNCIONÁRIO
 		Spark.get("/funcionario/lista", FuncionarioController.obterLista);
-		Spark.post("/funcionario/incluir", FuncionarioController.incluir);
-		Spark.delete("/funcionario/:id/excluir", FuncionarioController.excluir);
+		Spark.get("/funcionario/:nome/incluir", FuncionarioController.incluir);
+		Spark.get("/funcionario/:id/excluir", FuncionarioController.excluir);
 		Spark.get("/funcionario/:id", FuncionarioController.obter);
 	}
 }

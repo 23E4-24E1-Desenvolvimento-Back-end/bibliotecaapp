@@ -1,40 +1,44 @@
 package bibliotecaApp.controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import bibliotecaApp.model.domain.Funcionario;
+import bibliotecaApp.model.service.FuncionarioService;
 import spark.Route;
 
 public class FuncionarioController {
 
 	public static Route obterLista = (req, res) -> {
 		
-		return new ArrayList<Funcionario>(				
-					Arrays.asList(
-							new Funcionario(),
-							new Funcionario("Joao"),
-							new Funcionario("Maria"),
-							new Funcionario("Jose")
-						)
-				);
+		return FuncionarioService.obterLista();
 	};
 	
 	public static Route incluir = (req, res) -> {
-		return "Inclusão de funcionário";
+		
+		String oNome = req.params("nome");
+		
+		Funcionario funcionario = new Funcionario(oNome);
+		
+		FuncionarioService.incluir(funcionario);
+		
+		return "Inclusão realizada com sucesso: "+funcionario+"!";
 	};
 	
 	public static Route excluir = (req, res) -> {
 		
 		Integer index = Integer.valueOf(req.params("id"));
 		
-		return "Exclusão do funcionário " + index;
+		Funcionario funcionario = FuncionarioService.obterPorId(index);		
+
+		FuncionarioService.excluir(index);		
+		
+		return "Exclusão realizada com sucesso: "+funcionario+"!";
 	};
 	
 	public static Route obter = (req, res) -> {
 		
 		Integer index = Integer.valueOf(req.params("id"));
 		
-		return "Obter o funcionário " + index;
+		Funcionario funcionario = FuncionarioService.obterPorId(index);		
+				
+		return "Recuperação realizada com sucesso: "+funcionario+"!";
 	};
 }
